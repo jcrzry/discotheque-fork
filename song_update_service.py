@@ -45,6 +45,8 @@ class SongQueue(PriorityQueue):
 	def add_to_end(self,song):
 		self.put((self.least_priority,song))
 		self.least_priority+=1
+		if self.last_picked_song != 1:
+			self.last_picked_song-=1
 
 	def promote_priority(self,song):
 		#frees up spot for the song whose priotity will be changed
@@ -75,10 +77,13 @@ class SongQueue(PriorityQueue):
 	def update_pos(self,pos,song):
 		self.queue[pos] = song
 	
-	def update_song_queue(song):
+	def update_song_queue(self,song_id):
 		song_to_swap = self.queue[self.last_picked_song]
 		for i in range(self.last_picked_song,self.qsize()):
-			
+			if song_id == i['id']:
+				self.update_pos(self.last_picked_song,i)
+				i = song_to_swap
+				self.last_picked_song+=1
 
 class songUpdateThread(threading.Thread):
 	def __init__(self,thread_name,floor_id,songlist,socket):

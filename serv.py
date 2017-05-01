@@ -55,11 +55,11 @@ def on_get_songs(data):
 
 
 
-#expects username, floor_id, and song as arguments.
+#expects username, floor_id, and song_id as arguments.
 #updates the song list by moving the song up the list/queue right after the last picked song.
-@socket.on('song picked')
+@socket.on(events.SONG_PICKED)
 def on_song_picked(data):
-	current_song = data['song']
+	current_song = data['song_id']
 	thread_holder.find_thread(data['floor_id']).update_list(current_song['id'])
 	
 	current_song['stream_url'] = stream_url_loc
