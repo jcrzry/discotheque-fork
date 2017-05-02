@@ -55,13 +55,12 @@ def on_get_songs(data):
 
 
 
-#expects username, floor_id, and song_id as arguments.
-#updates the song list by moving the song up the list/queue right after the last picked song.
-@socket.on(events.SONG_PICKED)
+#expects floor_id, and song_id as arguments.
+#updates songlist with song_picked added as the next song in the playlist to be played.
+@socket.on('song picked')
 def on_song_picked(data):
-	current_song = data['song_id']
+	current_song = data['song']
 	thread_holder.find_thread(data['floor_id']).update_list(current_song['id'])
-	
 	current_song['stream_url'] = stream_url_loc
 	socket.emit('song to play', current_song, room=floor_id)
 
@@ -246,6 +245,12 @@ def update_profile(data):
 	print(data)
 	me = update_profile(data)
 	socket.emit(events.PROFILE_UPDATED,me)
+	
+	
+@socket.on(events.PING)
+def on_ping(data):
+	s_id = request.sid
+	socket.emit(events.PONG, "keep me alive",room= s_id)
 
 #This event is for the privacy policy page
 @app.route('/privacy')
