@@ -1,0 +1,18 @@
+test:
+ override:
+   - python -m tests.unit_tests
+#     # - python -m tests/socket_tests
+     
+deployment:
+  staging:
+    branch: server
+    heroku:
+      appname: disco-theque
+
+machine:
+  python:
+    version: 3.5.2
+
+  environment:
+    DATABASE_URL: postgres://ktvliwlsnmcwwd:d0a6851acf107388ad33c8304fe0f99cf5747b3c052d97b59416c0dc0c520e82@ec2-54-83-25-217.compute-1.amazonaws.com:5432/df48o72g24uh87
+    

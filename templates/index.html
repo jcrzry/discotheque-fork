@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            @import 'https://fonts.googleapis.com/css?family=Roboto';
+            @import "{{url_for('static',filename='css/styles.css')}}";
+        </style>
+    <title> Discotheque </title>
+    </head>
+    <body>
+        <div id="intro">
+            <h1>Discotheque</h1>
+            <img src="{{url_for('static',filename='img/dt_Logo_temp-02.png')}}" id = "logo"></img>
+            <h2>A Social Music Experience.</h2>
+            <p> <a href = "https://play.google.com/store/apps/details?id=edu.jocruzcsumb.discotheque">Get Beta</a></p>
+        </div>
+        <div id="feature1">
+            <img src="{{url_for('static',filename='img/RoomSelect.png')}}" id = "fe1"></img>
+            <br /> <br /> <br />
+            With Discotheque, your room is your dance floor.  Pick from a variety of themes and genres.
+        </div>
+        
+        <div id="feature2">
+            <img src="{{url_for('static',filename='img/Profile.png')}}" id = "fe2"></img>
+            <br /> <br /> <br />
+            Customize your profile to fit your Discotheque tastes.  
+        </div>
+        <div id="feature3">
+            <img src="{{url_for('static',filename='img/AliceRoomSong.png')}}" id = "fe3"></img>
+            <br /> <br /> <br />
+            Within a room bring up the song list.  View the current songs title, artist, and length.  See what your friends have chosen to play next.
+        </div>
+        
+        <div id="conclusion">
+            <br /> <br /> <br />
+            Download Discotheque today and enjoy a silent disco.
+            <br />
+            <img src="{{url_for('static',filename='img/disco3.jpg')}}" id = "disco3"></img>
+        </div>
+        <hr>
+        <footer>
+        CST438, Spring 2017, Cal State Monterey Bay <br />
+        <a href="privacy">Privacy Policy</a>
+        </footer>
+
+    </body>
+</html>
