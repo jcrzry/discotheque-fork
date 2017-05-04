@@ -6,10 +6,7 @@ import random
 import serv
 from schema import *	
 import time
-<<<<<<< HEAD
 import json
-=======
->>>>>>> origin/server
 from song_update_service import * 
 from serv import socket
 
