@@ -34,12 +34,18 @@ class SongQueue(PriorityQueue):
 			self.least_priority+=1
 
 	def to_list(self):
+		l_q = sorted(list(self.queue),key=lambda x: x[0])
+		# print("l_q: ",json.dumps(l_q,indent=4))
+		
 		songlist = []
-		position = 0
-		while position != self.qsize():
-			_,song = self.queue[position]
-			songlist.append(song)
-			position+=1
+		for i in l_q:
+			_,s = i
+			songlist.append(s)
+		# position = 0
+		# while position != self.qsize():
+		# 	_,song = self.queue[position]
+		# 	songlist.append(song)
+			# position+=1
 		return songlist
 
 	def add_to_end(self,song):
@@ -84,6 +90,8 @@ class SongQueue(PriorityQueue):
 				self.update_pos(self.last_picked_song,i)
 				i = song_to_swap
 				self.last_picked_song+=1
+				
+
 
 class songUpdateThread(threading.Thread):
 	def __init__(self,thread_name,floor_id,songlist,socket):
@@ -123,7 +131,7 @@ class songUpdateThread(threading.Thread):
 					current_song = ds.refresh_song(_song,self.start_time)
 					self.songQ.update_pos(0,(0,current_song))
 					self.sleep_duration = math.floor((_song['duration']/1000.00))
-					#update information for seconf song in list
+					#update information for second song in list
 					_song = self.songQ.peek_pos(1)
 					print("sleep duration:",self.sleep_duration)
 					self.start_time = math.floor(self.start_time+self.sleep_duration)
@@ -145,7 +153,7 @@ class songUpdateThread(threading.Thread):
 					# print(s)
 					position +=1
 				else:
-					time.sleep(self.sleep_duration)
+					time.sleep(self.sleep_duration+2)
 					#gets song at index 0
 					_song = self.songQ.peek()
 					#sets sleep duration to be the length of the song at index 0
