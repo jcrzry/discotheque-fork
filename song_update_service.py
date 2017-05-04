@@ -41,11 +41,6 @@ class SongQueue(PriorityQueue):
 		for i in l_q:
 			_,s = i
 			songlist.append(s)
-		# position = 0
-		# while position != self.qsize():
-		# 	_,song = self.queue[position]
-		# 	songlist.append(song)
-			# position+=1
 		return songlist
 
 	def add_to_end(self,song):
@@ -90,7 +85,6 @@ class SongQueue(PriorityQueue):
 				self.update_pos(self.last_picked_song,i)
 				i = song_to_swap
 				self.last_picked_song+=1
-				
 
 
 class songUpdateThread(threading.Thread):
@@ -131,6 +125,7 @@ class songUpdateThread(threading.Thread):
 					current_song = ds.refresh_song(_song,self.start_time)
 					self.songQ.update_pos(0,(0,current_song))
 					self.sleep_duration = math.floor((_song['duration']/1000.00))
+
 					#update information for second song in list
 					_song = self.songQ.peek_pos(1)
 					print("sleep duration:",self.sleep_duration)

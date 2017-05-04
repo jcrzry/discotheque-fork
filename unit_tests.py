@@ -6,7 +6,10 @@ import random
 import serv
 from schema import *	
 import time
+<<<<<<< HEAD
 import json
+=======
+>>>>>>> origin/server
 from song_update_service import * 
 from serv import socket
 
@@ -210,6 +213,5 @@ class sc_test(unittest.TestCase):
 			print("popped song: ",so['title'])
 			slq.add_to_end(so)
 		self.assertIsNotNone(lq)
-
 if __name__ == '__main__':
     unittest.main()
