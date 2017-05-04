@@ -118,22 +118,22 @@ class songUpdateThread(threading.Thread):
 				if position == 0:
 					##start time 
 					print(self.thread_name)
-					self.start_time = math.floor(time.time() + 1)
+					self.start_time = math.ceil(time.time() + 1)
 					print("init time: ",self.start_time)
 					#update initial song info
 					_song = self.songQ.peek()
 					current_song = ds.refresh_song(_song,self.start_time)
 					self.songQ.update_pos(0,(0,current_song))
-					self.sleep_duration = math.floor((_song['duration']/1000.00))
+					self.sleep_duration = math.ceil((_song['duration']/1000.00))
 
 					#update information for second song in list
 					_song = self.songQ.peek_pos(1)
 					print("sleep duration:",self.sleep_duration)
-					self.start_time = math.floor(self.start_time+self.sleep_duration)
+					self.start_time = math.ceil(self.start_time+self.sleep_duration)
 					print("2nd song time:",self.start_time)
 
 					current_song = ds.refresh_song(_song,(self.start_time+2))
-					# self.sleep_duration += math.floor((_song['duration']/1000.00))
+					# self.sleep_duration += math.ceil((_song['duration']/1000.00))
 					self.songQ.update_pos(1,(1,current_song))
 					# print("*****queue init emit****")
 					self.songlist = self.songQ.to_list()
@@ -152,10 +152,10 @@ class songUpdateThread(threading.Thread):
 					#gets song at index 0
 					_song = self.songQ.peek()
 					#sets sleep duration to be the length of the song at index 0
-					self.sleep_duration = math.floor((_song['duration']/1000.0))
+					self.sleep_duration = math.ceil((_song['duration']/1000.0))
 					self.songQ.update_pos(0,(0,ds.refresh_song(_song,(self.start_time+3))))
 					#update song on the next update
-					self.start_time = math.floor(self.start_time + self.sleep_duration+3)
+					self.start_time = math.ceil(self.start_time + self.sleep_duration+3)
 					_song = self.songQ.peek_pos(1)
 					self.songQ.update_pos(1,(1,ds.refresh_song(_song,self.start_time)))
 					print("************************************************************************************************************")
